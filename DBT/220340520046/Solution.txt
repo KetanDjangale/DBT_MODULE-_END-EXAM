@@ -1,0 +1,99 @@
+NAME - KETAN JANGALE
+
+1.ANS
+CREATE TABLE DEPT(DEPTNO INT(2),DNAME VARCHAR(15),LOC VARCHAR(10));
+
+INSERT INTO DEPT VALUES(10,'ACCOUNTING','NEWYORK'),(20,'RESEARCH','DALLAS'),
+(30,'SALES','CHICAGO'),(40,'OPERATIONS','BOSTON');
+SELECT *FROM DEPT;
+
+
+
+2.ANS
+CREATE TABLE EMP(EMPNO INT(4),ENMAE VARCHAR(10),JOB VARCHAR(9),HIREDATE DATE,SAL FLOAT(7,2),
+COMM FLOAT(7,2),DEPT INT(2));
+
+INSERT INTO EMP VALUES(7839,'KING','MANAGER','1991-11-17',5000,NULL,10),
+(7698,'BLAKE','CLERK','1981-05-01',2850,NULL,30),
+(7782,'CLARK','MANAGER','1981-06-09',2450,NULL,10),
+(7566,'JONES','CLERK','1981-04-02',2975,NULL,20),
+(7654,'MARTIN','SALESMAN','1981-09-28',1250,1400,30),
+(7499,'ALLEN','SALESMAN','1981-02-20',1600,300,30);
+SELECT * FROM EMP;
+
+3.Display all the employees where SAL between 2500 and 5000 (inclusive of both)
+ans. select ename,sal from emp where sal between 2500 and 3000;
+
+4.Display all the ENAMEs in descending order of ENAME.
+ans.Select ename from emp order by ename desc;
+
+5.select lower(job) from emp;
+ans. select lower(job) from emp;
+
+6.Display the ENAMEs and the lengths of the ENAMEs
+ans. select ename,length(ename) as 'LENGTH' from emp;
+
+7.Display the DEPTNO and the count of employees who belong to that DEPTNO
+ANS.SELECT DEPT,COUNT(ENAME) AS "TOTAL EMPLOYEES" FROM EMP GROUP BY DEPT;
+
+8.Display the DNAMEs and the ENAMEs who belong to that DNAME.
+ANS.SELECT DNAME,ENAME FROM EMP,DEPT WHERE EMP.DEPT = DEPT.DEPTNO;
+
+9.Display the position at which the string ‘AR’ occurs in the ename.
+ANS.SELECT ENAME,INSTR(ENAME,'AR') AS POSITION FROM EMP;
+
+10.Display the HRA for each employee given that HRA is 20% of SAL.
+ANS.SELECT ENAME, SAL,SAL*0.20 AS 'HRA'FROM EMP;
+
+
+
+section 2
+
+
+2.ans
+create table triangle(s1 int,
+s2 int,
+s3 int,
+remark varchar(25)
+);
+
+-- 2. stored function
+delimiter //
+create function FUNC1(s1 int,s2 int,s3 int)
+returns boolean
+deterministic 
+begin
+if s1<(s2+s3) and s2<(s1+s3) and s3<(s1+s2) then
+   return true;
+   else 
+   return false;
+   end if;
+   end; //
+   delimiter ;
+   
+   delimiter //
+   create procedure tri(a int,b int,c int)
+   begin
+   if FUNC1(a,b,c) then 
+   insert into triangle values(a,b,c,'Valid triangle');
+   else
+   insert into triangle values(a,b,c,'invalid triangle');
+   end if;
+   end; //
+   delimiter ;
+   call tri(10,20,30);
+   call tri(50,10,35);
+   call tri(20,10,20);
+
+   select *from triangle;
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+
